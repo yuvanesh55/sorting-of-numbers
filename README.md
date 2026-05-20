@@ -22,14 +22,35 @@ To write and execute an Assembly Language Program for sorting data in Ascending 
 
 ## Program (Ascending order)
 
-```asm
-
-
-
+```
+ORG 0000H
+MOV R4, #04H ；Number of passes (N-1)
+OUTER: MOV R3, #04H ； Inner 1oop counter
+MOV R0,#50H ；Array starting address
+INNER: MOV A, @R0
+MOV B, A
+INC R0
+CLR C
+SUBB A,@R0 ； Compare adjacent elements
+JC NO_SWAP ;If A< @RO (Carry), no swap
+；Exchange elements
+MOV A, @R0
+ХСН А, В
+MOV @R0, A 
+DEC RO 
+MOV A, B 
+XСH A, B 
+MOV @R0,A 
+INC R0
+NO_SWAP: DJNZ R3, INNER
+DJNZ R4, OUTER
+END
 
 ```
 ## OUTPUT(Ascending order)
 
+
+<img width="774" height="261" alt="WhatsApp Image 2026-05-16 at 11 33 18" src="https://github.com/user-attachments/assets/1e131530-aed5-42e4-9b57-d749825d4a3f" />
 
 
 ---
@@ -48,17 +69,47 @@ To write and execute an Assembly Language Program for sorting data in Ascending 
 ---
 ## Program (Descending order)
 
-```asm
+```
+ORG 0000H
 
+MOV R4,#04H        ; Number of passes
 
+OUTER: MOV R3,#04H ; Inner loop counter
+       MOV R0,#50H ; Starting address
 
+INNER: MOV A,@R0   ; Get first element
+       MOV B,A
+
+       INC R0      ; Next element
+
+       CLR C
+       SUBB A,@R0  ; Compare two elements
+
+       JNC NO_SWAP ; If first > second, no swap
+
+       ; Swap elements
+
+       MOV A,@R0
+       XCH A,B
+       MOV @R0,A
+
+       DEC R0
+       MOV A,B
+       MOV @R0,A
+
+       INC R0
+
+NO_SWAP:
+       DJNZ R3,INNER
+       DJNZ R4,OUTER
+
+END
 
 ```
 ## OUTPUT(Descending order)
 
-
+<img width="751" height="287" alt="image" src="https://github.com/user-attachments/assets/739dfa93-7df8-4332-aaa6-ea9c6c0167cb" />
 
 ---
 ## RESULT:
 Thus the sorting of given data was done using 8051 keil software.
-
